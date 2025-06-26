@@ -32,7 +32,11 @@ public class Move : MonoBehaviour
     int blackking_x = 4;
     int blackking_y = 0;
 
-    [SerializeField] GameObject Promotion;
+    bool wking_dangerous = false;
+    bool bking_dangerous = false;
+
+    [SerializeField] GameObject wPromotion;
+    [SerializeField] GameObject bPromotion;
     
    
 
@@ -44,27 +48,29 @@ public class Move : MonoBehaviour
         ChooseMove();
     }
 
-    public void pushRook()
+    public void w_pushRook()
     {
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_w_rook;
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = true;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = false;
         chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
         chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
 
         w_rookCheck(currentx, currenty);
 
-        Promotion.SetActive(false);
+        wPromotion.SetActive(false);
 
         Undo();
         nowWhite = !nowWhite;
         TurnChange();
     }
-    public void pushBishop()
+    public void w_pushBishop()
     {
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_w_bishop;
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = true;
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = false;
         chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
@@ -74,17 +80,18 @@ public class Move : MonoBehaviour
 
         w_bishopCheck(currentx, currenty);
 
-        Promotion.SetActive(false);
+        wPromotion.SetActive(false);
 
         Undo();
         nowWhite = !nowWhite;
         TurnChange();
         
     }
-    public void pushQueen()
+    public void w_pushQueen()
     {
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_w_queen;
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = true;
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = false;
         chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
@@ -92,16 +99,17 @@ public class Move : MonoBehaviour
 
         w_bishopCheck(currentx, currenty);
         w_rookCheck(currentx, currenty);
-        Promotion.SetActive(false);
+        wPromotion.SetActive(false);
 
         Undo();
         nowWhite = !nowWhite;
         TurnChange();
     }
-    public void pushKnight()
+    public void w_pushKnight()
     {
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_w_knight;
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = true;
         chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = false;
         chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
@@ -109,7 +117,83 @@ public class Move : MonoBehaviour
 
         w_knightCheck(currentx, currenty);
 
-        Promotion.SetActive(false);
+        wPromotion.SetActive(false);
+
+        Undo();
+        nowWhite = !nowWhite;
+        TurnChange();
+    }
+
+    public void b_pushRook()
+    {
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_b_rook;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = false;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = true;
+        chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
+        chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
+
+        b_rookCheck(currentx, currenty);
+
+        wPromotion.SetActive(false);
+
+        Undo();
+        nowWhite = !nowWhite;
+        TurnChange();
+    }
+    public void b_pushBishop()
+    {
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_b_bishop;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = false;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = true;
+        chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
+        chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
+
+
+
+        b_bishopCheck(currentx, currenty);
+
+        wPromotion.SetActive(false);
+
+        Undo();
+        nowWhite = !nowWhite;
+        TurnChange();
+        
+    }
+    public void b_pushQueen()
+    {
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_b_queen;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = false;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = true;
+        chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
+        chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
+
+        b_bishopCheck(currentx, currenty);
+        b_rookCheck(currentx, currenty);
+        wPromotion.SetActive(false);
+
+        Undo();
+        nowWhite = !nowWhite;
+        TurnChange();
+    }
+    public void b_pushKnight()
+    {
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_b_knight;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = false;
+        chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = true;
+        chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
+        chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
+
+        b_knightCheck(currentx, currenty);
+
+        wPromotion.SetActive(false);
 
         Undo();
         nowWhite = !nowWhite;
@@ -193,7 +277,8 @@ public class Move : MonoBehaviour
             {
                 if (currenty == 0)
                 {
-                    Promotion.SetActive(true);
+                    wPromotion.SetActive(true);
+                    return;
                 }
                 else
                 {
@@ -210,14 +295,22 @@ public class Move : MonoBehaviour
             }
             else if (saveMal == "b_pawn")
             {
-                chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_b_pawn;
-                chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
-                chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = false;
-                chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = true;
-                chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
-                chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
+                if (currenty == 7)
+                {
+                    bPromotion.SetActive(true);
+                    return;
+                }
+                else
+                {
+                    chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().mal = Mal.is_b_pawn;
+                    chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().exists = true;
+                    chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isWhite = false;
+                    chesspan[currenty].pan[currentx].gameObject.GetComponent<SquareController>().isBlack = true;
+                    chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
+                    chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
 
-                b_pawnCheck(currentx, currenty);
+                    b_pawnCheck(currentx, currenty);
+                }
             }
 
             else if (saveMal == "w_rook")
@@ -323,6 +416,7 @@ public class Move : MonoBehaviour
                 chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
                 chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
 
+                wking_dangerous = false;
                 w_kingCheck(currentx, currenty);
             }
             else if (saveMal == "b_king")
@@ -337,6 +431,7 @@ public class Move : MonoBehaviour
                 chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().mal = Mal.None;
                 chesspan[prev_y].pan[prev_x].gameObject.GetComponent<SquareController>().exists = false;
 
+                bking_dangerous = false;
                 b_kingCheck(currentx, currenty);
             }
 
@@ -368,35 +463,64 @@ public class Move : MonoBehaviour
 
     public void TurnChange() // 흰 백 턴 교체하기
     {
+        
         if (nowWhite)
         {
-            for (int i = 0; i < 8; i++)
+            if (wking_dangerous)
             {
-                for (int j = 0; j < 8; j++)
+                for (int i = 0; i < 8; i++)
                 {
-                    if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().isWhite && chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists)
-                        chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = true;
-                    else
+                    for (int j = 0; j < 8; j++)
                     {
                         chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
                     }
+                }
+                chesspan[whiteking_y].pan[whiteking_x].gameObject.GetComponentInChildren<Button>().interactable = true;
+            }
+            else
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().isWhite && chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists)
+                            chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = true;
+                        else
+                        {
+                            chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
+                        }
 
+                    }
                 }
             }
         }
         else
         {
-            for (int i = 0; i < 8; i++)
+            if (bking_dangerous)
             {
-                for (int j = 0; j < 8; j++)
+                for (int i = 0; i < 8; i++)
                 {
-                    if (!chesspan[i].pan[j].gameObject.GetComponent<SquareController>().isWhite && chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists)
-                        chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = true;
-                    else
+                    for (int j = 0; j < 8; j++)
                     {
                         chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
                     }
+                }
+                chesspan[blackking_y].pan[blackking_x].gameObject.GetComponentInChildren<Button>().interactable = true;
+            }
+            else
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (!chesspan[i].pan[j].gameObject.GetComponent<SquareController>().isWhite && chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists)
+                            chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = true;
+                        else
+                        {
+                            chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
+                        }
 
+                    }
                 }
             }
         }
@@ -3007,6 +3131,8 @@ public class Move : MonoBehaviour
 
     void w_kingCanMove()
     {
+        wking_dangerous = true;
+
         int[,] panArray = new int[8, 8];
 
         int x = whiteking_x;
@@ -3107,6 +3233,7 @@ public class Move : MonoBehaviour
 
     void b_kingCanMove()
     {
+        bking_dangerous = true;
         int[,] panArray = new int[8, 8];
 
         int x = blackking_x;
