@@ -533,47 +533,84 @@ public class Move : MonoBehaviour
     {
         if (nowWhite)
         {
-            for (int i = 0; i < 8; i++)
+            if (wking_dangerous)
             {
-                for (int j = 0; j < 8; j++)
+                for (int i = 0; i < 8; i++)
                 {
-                    if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists)
+                    for (int j = 0; j < 8; j++)
                     {
-                        if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().isWhite)
-                            chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = true;
-                        else chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
-                    }
-                    else
-                    {
-                        chesspan[i].pan[j].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
-                        chesspan[i].pan[j].gameObject.GetComponent<Image>().sprite = null;
                         chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
+                        if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists == false)
+                        {
+                            chesspan[i].pan[j].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                            chesspan[i].pan[j].gameObject.GetComponent<Image>().sprite = null;
+                        }
                     }
+                }
+                chesspan[whiteking_y].pan[whiteking_x].gameObject.GetComponentInChildren<Button>().interactable = true;
+            }
+            else
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists)
+                        {
+                            if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().isWhite)
+                                chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = true;
+                            else chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            chesspan[i].pan[j].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                            chesspan[i].pan[j].gameObject.GetComponent<Image>().sprite = null;
+                            chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
+                        }
 
+                    }
                 }
             }
             Clicked = false;
         }
         else
         {
-
-            for (int i = 0; i < 8; i++)
+            if (bking_dangerous)
             {
-                for (int j = 0; j < 8; j++)
+                for (int i = 0; i < 8; i++)
                 {
-                    if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists)
+                    for (int j = 0; j < 8; j++)
                     {
-                        if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().isBlack)
-                            chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = true;
-                        else chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
-                    }
-                    else
-                    {
-                        chesspan[i].pan[j].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
-                        chesspan[i].pan[j].gameObject.GetComponent<Image>().sprite = null;
                         chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
+                        if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists == false)
+                        {
+                            chesspan[i].pan[j].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                            chesspan[i].pan[j].gameObject.GetComponent<Image>().sprite = null;
+                        }
                     }
+                }
+                chesspan[blackking_y].pan[blackking_x].gameObject.GetComponentInChildren<Button>().interactable = true;
+            }
+            else
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().exists)
+                        {
+                            if (chesspan[i].pan[j].gameObject.GetComponent<SquareController>().isBlack)
+                                chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = true;
+                            else chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            chesspan[i].pan[j].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                            chesspan[i].pan[j].gameObject.GetComponent<Image>().sprite = null;
+                            chesspan[i].pan[j].gameObject.GetComponentInChildren<Button>().interactable = false;
+                        }
 
+                    }
                 }
             }
             Clicked = false;
